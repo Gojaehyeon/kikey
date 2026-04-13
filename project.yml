@@ -1,0 +1,59 @@
+name: Kikey
+options:
+  bundleIdPrefix: com.gojaehyeon
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+
+settings:
+  base:
+    SWIFT_VERSION: "5.10"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+    CODE_SIGN_IDENTITY: "-"
+    ENABLE_HARDENED_RUNTIME: YES
+    PRODUCT_NAME: Kikey
+    INFOPLIST_KEY_LSUIElement: YES
+    INFOPLIST_KEY_NSHumanReadableCopyright: "© 2026 Gojaehyeon"
+    INFOPLIST_KEY_NSAppleEventsUsageDescription: "Kikey listens to keystrokes globally to play sounds. Your input is never recorded or transmitted."
+    GENERATE_INFOPLIST_FILE: NO
+
+targets:
+  Kikey:
+    type: application
+    platform: macOS
+    deploymentTarget: "14.0"
+    sources:
+      - path: Sources/Kikey
+      - path: Resources/Assets.xcassets
+    resources:
+      - path: Resources/Assets.xcassets
+        optional: true
+    info:
+      path: Resources/Info.plist
+      properties:
+        CFBundleName: Kikey
+        CFBundleDisplayName: Kikey
+        CFBundleIdentifier: com.gojaehyeon.kikey
+        CFBundleShortVersionString: "0.1.0"
+        CFBundleVersion: "1"
+        LSMinimumSystemVersion: "14.0"
+        LSUIElement: true
+        NSHumanReadableCopyright: "© 2026 Gojaehyeon"
+        NSPrincipalClass: NSApplication
+        NSSupportsAutomaticTermination: false
+        NSSupportsSuddenTermination: false
+    entitlements:
+      path: Resources/Kikey.entitlements
+      properties:
+        com.apple.security.app-sandbox: false
+        com.apple.security.device.audio-input: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.gojaehyeon.kikey
+        ENABLE_PREVIEWS: YES
+        SWIFT_EMIT_LOC_STRINGS: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
