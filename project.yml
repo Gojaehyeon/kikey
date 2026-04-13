@@ -57,3 +57,25 @@ targets:
         ENABLE_PREVIEWS: YES
         SWIFT_EMIT_LOC_STRINGS: YES
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    scheme:
+      testTargets:
+        - KikeyTests
+      gatherCoverageData: true
+
+  KikeyTests:
+    type: bundle.unit-test
+    platform: macOS
+    deploymentTarget: "14.0"
+    sources:
+      - path: Tests/KikeyTests
+    dependencies:
+      - target: Kikey
+    settings:
+      base:
+        PRODUCT_NAME: KikeyTests
+        PRODUCT_MODULE_NAME: KikeyTests
+        PRODUCT_BUNDLE_IDENTIFIER: com.gojaehyeon.kikey.tests
+        INFOPLIST_KEY_LSUIElement: NO
+        GENERATE_INFOPLIST_FILE: YES
+        BUNDLE_LOADER: $(TEST_HOST)
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/Kikey.app/Contents/MacOS/Kikey

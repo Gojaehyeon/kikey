@@ -7,6 +7,9 @@ enum SoundPackRegistry {
         TypewriterPack(),
         PopPack(),
         DropPack(),
+        BellPack(),
+        HeartPack(),
+        ClickPack(),
     ]
 
     static var defaultPack: SoundPack { all[0] }
