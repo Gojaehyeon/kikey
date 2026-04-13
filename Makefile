@@ -1,4 +1,4 @@
-.PHONY: project build run clean archive open lint
+.PHONY: project build run clean archive open lint icon zip dmg dist
 
 PROJECT := Kikey.xcodeproj
 SCHEME  := Kikey
@@ -27,3 +27,12 @@ clean:
 
 open: project
 	open $(PROJECT)
+
+icon:
+	swift scripts/gen-icon.swift
+
+dist:
+	./scripts/package.sh
+
+zip: dist
+dmg: dist

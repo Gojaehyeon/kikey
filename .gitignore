@@ -27,6 +27,7 @@ Icon?
 *.xcarchive
 export/
 artifacts/
+dist/
 
 # Editors
 .vscode/
