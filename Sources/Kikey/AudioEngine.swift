@@ -37,11 +37,13 @@ final class AudioEngine {
             }
 
             mixer.outputVolume = gain
+            engine.mainMixerNode.outputVolume = 1.0
             do {
                 try engine.start()
                 voices.forEach { $0.play() }
+                NSLog("Kikey[audio]: engine started, voices=\(voices.count) gain=\(gain) pack=\(pack.id)")
             } catch {
-                NSLog("Kikey: failed to start audio engine: \(error)")
+                NSLog("Kikey[audio]: FAILED to start: \(error)")
             }
         }
     }
@@ -70,19 +72,14 @@ final class AudioEngine {
     }
 
     func setPack(_ pack: SoundPack) {
+        // All built-in packs share the same mono 44.1kHz format, so we just
+        // swap the reference — no reconnect required. Doing an actual
+        // disconnect/reconnect here previously left voice nodes in a stopped
+        // state that scheduleBuffer(_:.interrupts) could not revive.
         queue.async {
-            let wasRunning = self.engine.isRunning
-            if wasRunning {
-                self.voices.forEach { self.engine.disconnectNodeOutput($0) }
-                self.engine.disconnectNodeOutput(self.mixer)
-            }
+            pack.reset()
             self.pack = pack
-            if wasRunning {
-                self.engine.connect(self.mixer, to: self.engine.mainMixerNode, format: pack.audioFormat)
-                for node in self.voices {
-                    self.engine.connect(node, to: self.mixer, format: pack.audioFormat)
-                }
-            }
+            NSLog("Kikey[audio]: switched pack → \(pack.id)")
         }
     }
 
@@ -90,6 +87,7 @@ final class AudioEngine {
 
     func playKeyDown(keyCode: UInt16) {
         let buffer = pack.bufferForKeyDown(keyCode: keyCode, randomizePitch: Settings.shared.randomizePitch)
+        NSLog("Kikey[audio]: playKeyDown keyCode=\(keyCode) frames=\(buffer.frameLength) running=\(engine.isRunning)")
         schedule(buffer: buffer)
     }
 

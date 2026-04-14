@@ -4,12 +4,16 @@ enum SoundPackRegistry {
     static let all: [SoundPack] = [
         CatPack(),
         MechPack(),
+        TopreePack(),
         TypewriterPack(),
         PopPack(),
         DropPack(),
         BellPack(),
         HeartPack(),
         ClickPack(),
+        makeTwinklePack(),
+        makeOdeToJoyPack(),
+        makeCanonPack(),
     ]
 
     static var defaultPack: SoundPack { all[0] }

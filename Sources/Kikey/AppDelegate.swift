@@ -15,11 +15,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         audio.start()
 
         // Wire keyboard events to the audio engine.
+        var keyDownCount = 0
         tap.onKeyDown = { [weak self] keyCode in
             guard let self = self else { return }
+            keyDownCount += 1
+            if keyDownCount <= 3 {
+                NSLog("Kikey[delegate]: keyDown #\(keyDownCount) keyCode=\(keyCode) enabled=\(Settings.shared.enabled) secure=\(SecureInputGuard.isActive)")
+            }
             guard Settings.shared.enabled else { return }
             if Settings.shared.muteOnSecureInput && SecureInputGuard.isActive { return }
             self.audio.playKeyDown(keyCode: keyCode)
+            if Settings.shared.hapticFeedback {
+                HapticFeedback.bump()
+            }
         }
         tap.onKeyUp = { [weak self] keyCode in
             guard let self = self else { return }

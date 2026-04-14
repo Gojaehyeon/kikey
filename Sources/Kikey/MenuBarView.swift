@@ -64,7 +64,17 @@ struct MenuBarView: View {
             Toggle("Mute on secure input", isOn: $s.muteOnSecureInput)
             Toggle("Play key release", isOn: $s.playKeyUp)
             Toggle("Randomize pitch", isOn: $s.randomizePitch)
+            Toggle("Trackpad haptic (rest finger on trackpad)", isOn: $s.hapticFeedback)
             Toggle("Launch at login", isOn: $s.launchAtLogin)
+
+            Divider()
+
+            Button {
+                AudioEngine.shared.playKeyDown(keyCode: 0)
+            } label: {
+                Label("Test sound", systemImage: "speaker.wave.2.fill")
+                    .frame(maxWidth: .infinity)
+            }
 
             Divider()
 

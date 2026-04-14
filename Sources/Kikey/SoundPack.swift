@@ -12,6 +12,14 @@ protocol SoundPack: AnyObject {
 
     func bufferForKeyDown(keyCode: UInt16, randomizePitch: Bool) -> AVAudioPCMBuffer
     func bufferForKeyUp(keyCode: UInt16, randomizePitch: Bool) -> AVAudioPCMBuffer?
+
+    /// Called when the pack becomes active. Stateful packs (e.g. music box)
+    /// override this to reset their internal position.
+    func reset()
+}
+
+extension SoundPack {
+    func reset() {}
 }
 
 /// Shared helpers for procedural synthesis.

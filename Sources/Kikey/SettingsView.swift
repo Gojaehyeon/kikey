@@ -26,6 +26,7 @@ struct SettingsView: View {
                     }
                     Toggle("Play key release", isOn: $s.playKeyUp)
                     Toggle("Randomize pitch", isOn: $s.randomizePitch)
+                    Toggle("Trackpad haptic", isOn: $s.hapticFeedback)
                 }
                 Section("Privacy") {
                     Toggle("Mute on secure input", isOn: $s.muteOnSecureInput)

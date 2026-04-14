@@ -3,8 +3,8 @@ import AVFoundation
 @testable import Kikey
 
 final class SoundPackTests: XCTestCase {
-    func testRegistryHasEightPacks() {
-        XCTAssertEqual(SoundPackRegistry.all.count, 8)
+    func testRegistryHasTwelvePacks() {
+        XCTAssertEqual(SoundPackRegistry.all.count, 12)
     }
 
     func testAllPackIDsAreUnique() {

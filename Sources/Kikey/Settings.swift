@@ -34,6 +34,7 @@ final class Settings {
         static let launchAtLogin = "kikey.launchAtLogin"
         static let randomizePitch = "kikey.randomizePitch"
         static let playKeyUp = "kikey.playKeyUp"
+        static let hapticFeedback = "kikey.hapticFeedback"
     }
 
     var enabled: Bool {
@@ -71,6 +72,9 @@ final class Settings {
     var playKeyUp: Bool {
         didSet { store.set(playKeyUp, forKey: Key.playKeyUp) }
     }
+    var hapticFeedback: Bool {
+        didSet { store.set(hapticFeedback, forKey: Key.hapticFeedback) }
+    }
 
     private init() {
         // Defaults
@@ -83,6 +87,7 @@ final class Settings {
             Key.launchAtLogin: false,
             Key.randomizePitch: true,
             Key.playKeyUp: true,
+            Key.hapticFeedback: false,
         ])
         self.enabled = store.bool(forKey: Key.enabled)
         self.volume = VolumeLevel(rawValue: store.string(forKey: Key.volume) ?? "balanced") ?? .balanced
@@ -92,5 +97,6 @@ final class Settings {
         self.launchAtLogin = store.bool(forKey: Key.launchAtLogin)
         self.randomizePitch = store.bool(forKey: Key.randomizePitch)
         self.playKeyUp = store.bool(forKey: Key.playKeyUp)
+        self.hapticFeedback = store.bool(forKey: Key.hapticFeedback)
     }
 }

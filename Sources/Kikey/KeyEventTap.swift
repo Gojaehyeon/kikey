@@ -55,6 +55,7 @@ final class KeyEventTap {
             CFRunLoopAddSource(CFRunLoopGetMain(), source, .commonModes)
             CGEvent.tapEnable(tap: tap, enable: true)
         }
+        NSLog("Kikey[tap]: started successfully")
         return true
     }
 
